@@ -1,0 +1,3 @@
+Elevator lift = new Elevator();
+lift.setCurrentFloor(1);
+lift.getCurrentFloor()
