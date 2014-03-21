@@ -5,7 +5,7 @@ public class Floor {
 	// attributes
 	private int floorNumber;
 	private int maxCapacity = 1;
-	private int currentCapacity = 0;
+	private int peopleCount = 0;
 
 	// compositions
 	public CallButton callButton;
@@ -32,19 +32,23 @@ public class Floor {
 		maxCapacity = capacity;
 	}
 	
-	public int getCurrentCapacity()
+	public int getPeopleCount()
 	{
-		return currentCapacity;
+		return peopleCount;
 	}
 	
-	public void setCurrentCapacity(int capacityRightNow)
+	public void setPeopleCount(int peopleCountRightNow)
 	{
 		// make sure the amount of people that come to the floor
 		// does not exceed the maxCapacity of this floor
-		if(currentCapacity < maxCapacity)
-			currentCapacity = capacityRightNow;
+		if(peopleCount < maxCapacity)
+			peopleCount = peopleCountRightNow;
 		else
-			currentCapacity = maxCapacity;
+		{
+			peopleCount = maxCapacity;
+			System.out.println("Floor " + floorNumber + 
+					" can only contain " + maxCapacity + " people.");
+		}
 	}
 
 	// constructor

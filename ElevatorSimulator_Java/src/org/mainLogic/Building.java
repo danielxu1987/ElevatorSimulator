@@ -4,6 +4,7 @@ public class Building {
 	
 	// attributes
 	private String name;
+	private int maxCapacity;
 	
 	// compositional elements
 	public Floor[] floors;
@@ -14,9 +15,20 @@ public class Building {
 		return name;
 	}
 	
+	public int getMaxCapacity()
+	{
+		return maxCapacity;
+	}
+	
+	public void setMaxCapacity(int capacity)
+	{
+		maxCapacity = capacity;
+	}
+	
 	// constructors
-	public Building(String buildingName, int floorCount){
+	public Building(String buildingName, int floorCount, int capacity){
 		name = buildingName;
+		maxCapacity = capacity;
 		
 		// An Elevator is constructed once 
 		// a new Building comes into existence
@@ -44,9 +56,14 @@ public class Building {
 		System.out.println("Building " + name + " was just constructed.");
 	}
 
+	public Building(String buildingName, int capacity)
+	{
+		this(buildingName, 2, capacity);
+	}
+	
 	public Building(String buildingName)
 	{
-		this(buildingName, 2);
+		this(buildingName, 2, 3);
 	}
 
 }
