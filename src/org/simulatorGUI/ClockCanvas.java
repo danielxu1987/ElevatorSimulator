@@ -14,7 +14,6 @@ final class ClockCanvas extends JPanel{
 	
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 		
 		// set the circle that represents the clock to be
