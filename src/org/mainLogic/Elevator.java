@@ -53,14 +53,12 @@ public class Elevator {
 	
 	// actual methods (behaviours)
 	
-	/*the elevator departs and immediately 
+	/**the elevator departs and immediately 
 	 * (reality simplified) arrives at the floor 
 	 * where the passenger is, or where the passenger
-	 *  intends to go to; attri_BoardingFloor (can 
-	 *  affect passenger's currentFloor value too-
-	 *  call method), attri_IsLightOn, attri_RingBell;
-	 *   call_RingBell, call_OpenElevatorDoor;*/
-	public void Moves(int callingFloor){
+	 *  intends to go to. The input is the floor Elevator
+	 *  is going to move to*/
+	public void moveTo(int destineFloor){
 		// several events take place in a sequence
 		// assumed that elevator sends direct method 
 		// calls to all other components, bell and doors... 
@@ -69,16 +67,14 @@ public class Elevator {
 //		message += closeElevatorDoor();
 		closeElevatorDoor();
 		
-		// assumed that the elevator arrives at 
-		// the other floor immediately
-//		message += ArriveAtNewFloor(callingFloor);
-		ArriveAtNewFloor(callingFloor);
+		// assumed the movement of elevator from boarding floor
+		// to destine floor takes no time
+		ArriveAtNewFloor(destineFloor);
 		
 //		// Bell rings right away, 'Bing!'
 //		RingBell();
 		
 		// after the bell rings elevator door opens
-//		message += openElevatorDoor();
 		openElevatorDoor();
 		
 //		// ...immediately the floor door opens too
@@ -87,8 +83,8 @@ public class Elevator {
 //		System.out.println(message);
 	}
 	
-	// Just to change the boarding floor of elevator
-	// to the floor where passenger's awaiting
+	/** Change the boarding floor of elevator to the floor
+	 *  where passenger's awaiting */
 	private void ArriveAtNewFloor(int callingFloor){
 		currentFloor = callingFloor;
 		
@@ -112,19 +108,15 @@ public class Elevator {
 //	}
 */
 
-	// Ask the ElevatorDoor to open
-	public void openElevatorDoor(){
+	/** Ask the ElevatorDoor to open */
+	public void openElevatorDoor()
+	{
 		elevatorDoor.open();
-		String message = "ElevatorDoor opened.";
-//		return message;
-		System.out.println(message);
 	}
 	
-	// Ask the ElevatorDoor to close
-	public void closeElevatorDoor(){
+	/** Ask the ElevatorDoor to close */
+	public void closeElevatorDoor()
+	{
 		elevatorDoor.close();
-		String message = "ElevatorDoor closed.";
-//		return message;
-		System.out.println(message);
 	}
 }

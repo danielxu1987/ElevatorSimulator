@@ -24,8 +24,8 @@ public class CallButton {
 				floor + " was just created.");
 	}
 	
-	// when elevator has departed from the calling floor
-	// the call button can be released
+	/** When elevator has departed from the calling floor
+	 * the call button will be released */
 	public void release()
 	{
 		pressed = false;
@@ -33,7 +33,7 @@ public class CallButton {
 				" was released.");
 	}
 	
-	// tell system that the CallButton is pressed
+	/** tell the system that the CallButton is pressed */
 	public void press()
 	{
 		pressed = true;

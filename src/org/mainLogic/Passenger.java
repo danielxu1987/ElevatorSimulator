@@ -1,11 +1,13 @@
 package org.mainLogic;
 
+import com.sun.org.apache.regexp.internal.recompile;
+
 public class Passenger {
 
 	// attributes
 	private String name;
 	private int currentFloor;
-	private int destinedFloor;
+	private int destineFloor;
 	
 	// compositions
 	
@@ -27,12 +29,12 @@ public class Passenger {
 	}
 	
 	public int getDestinedFloorNumber() {
-		return destinedFloor;
+		return destineFloor;
 	}
 
 	public void setDestinedFloorNumber(int floorNumber) {
 		if(currentFloor != floorNumber)
-			destinedFloor = floorNumber;
+			destineFloor = floorNumber;
 		else
 			System.out.println("Passenger " + name + 
 					" won't need to move");
@@ -43,7 +45,7 @@ public class Passenger {
 		name = pName;
 		currentFloor = initialFloor;
 		
-		System.out.println("Passenger " + name + 
+		System.out.println("\nPassenger " + name + 
 				" just appeared at floor " + currentFloor);
 	}
 	
@@ -54,19 +56,18 @@ public class Passenger {
 	}
 	
 	// actual methods
-	// Passenger presses the CallButton
-	// a passenger can press the button to call 
-	// the elevator which triggers the light 
-	// to illuminate and elevator to move 
-	public void PressCallButton(){
+	/** a passenger can press the button to call 
+	 * the elevator which triggers the light 
+	 * to illuminate and elevator to move */
+	public void pressCallButton(){
 		String message = "Person " + name + 
 				" pressed CallButton at Floor " + currentFloor;
 //		return message;
 		System.out.println(message);
 	}
 	
-	// Passenger steps into ELevator
-	public void StepIntoElevator(){
+	/** Passenger steps into ELevator */
+	public void stepIntoElevator(){
 		// events take place in a sequence
 		
 //		// first release the CallButton
@@ -74,16 +75,31 @@ public class Passenger {
 		String message = "Person " + name + 
 				" just stepped into Elevator at Floor " +
 				currentFloor;
-//		return message;
+
+		alterFloorNumber();
+		
 		System.out.println(message);
 	}
 	
-	// Passenger steps out of Elevator
-	public void StepOutOfElevator(){
+	/** Alter the destine floor*/
+	private void alterFloorNumber()
+	{
+		if(currentFloor == 0)
+			destineFloor = 1;
+		else if(currentFloor == 1)
+			destineFloor = 0;
+	}
+	
+	/** Passenger steps out of Elevator */
+	public void stepOutOfElevator(){
 		String message = "Person " + name + 
 				" stepped out of Elevator at Floor "+
-				destinedFloor;
+				destineFloor;
 //		return message;
+		
+		// alter the floor where the passenger is at
+		alterFloorNumber();
+		
 		System.out.println(message);
 	}
 }

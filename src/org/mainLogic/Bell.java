@@ -4,8 +4,8 @@ public class Bell {
 
 	private int floorNumber;
 	
-	// A floor number is necessary to instantiate 
-	// a bell object
+	/** A floor number is necessary to instantiate a bell object
+	 */
 	public Bell(int floor){
 		floorNumber = floor;
 		
@@ -22,7 +22,7 @@ public class Bell {
 	}
 	
 	// actual methods
-	// Give a signal e.g. sound or text output
+	/** Give a signal e.g. sound or text output */
 	public void ring() {
 		System.out.println("Bing!");
 	}
