@@ -1,4 +1,4 @@
-package org.simulatorGUI;
+package org.simulator.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;

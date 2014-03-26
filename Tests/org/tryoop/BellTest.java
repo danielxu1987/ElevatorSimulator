@@ -2,7 +2,7 @@ package org.tryoop;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import org.mainLogic.Bell;
+import org.simulator.mainLogic.Bell;
 
 public class BellTest {
 

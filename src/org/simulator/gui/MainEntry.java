@@ -1,4 +1,4 @@
-package org.simulatorGUI;
+package org.simulator.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -15,11 +15,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 
-import org.mainLogic.Building;
-import org.mainLogic.Passenger;
-import org.simulatorGUI.ClockCanvas;
-import org.simulatorGUI.ElevatorCanvas;
-import org.simulatorGUI.FloorCanvas;
+import org.simulator.gui.ClockCanvas;
+import org.simulator.gui.ElevatorCanvas;
+import org.simulator.gui.FloorCanvas;
+import org.simulator.mainLogic.Building;
+import org.simulator.mainLogic.Passenger;
+import org.simulator.threads.PassengerThread;
 
 
 public class MainEntry extends JFrame
@@ -187,13 +188,13 @@ public class MainEntry extends JFrame
 
 				// instantiate the Person thread
 				// assign passenger on floor 0 to this thread
-				pThread1 = new PassengerThread(passengers[0]);
+				pThread1 = new PassengerThread(passengers[0], building.elevator);
 				
 				// add the newly arrived passenger
 				building.floors[0].setPeopleCount(1);
 				
 				// run the passenger thread
-				pThread1.start();
+//				pThread1.start();
 			}
 			
 			if(e.getSource() == floorButton2)
@@ -204,7 +205,7 @@ public class MainEntry extends JFrame
 				
 				// instantiate the thread to be attached by passenger
 				// on floor 1
-				pThread2 = new PassengerThread(passengers[1]);
+				pThread2 = new PassengerThread(passengers[1], building.elevator);
 				
 				// add the newly arrived passenger
 				// if the amount of people exceeds the max capacity
@@ -213,71 +214,10 @@ public class MainEntry extends JFrame
 				building.floors[1].setPeopleCount(1);
 				
 				// run the passenger thread
-				pThread2.start();
+//				pThread2.start();
 			}
 		}
 	}
 
-/*		
- * The person calls the elevator
- * Control system receives the request and asks the elevator to 
- * 		move to the floor of calling
- * Release the CallButton at current Floor once Elevator arrives
- * After the elevator door opens, the passenger steps in
- * Once the elevator door closes elevator moves to the destine Floor
- * Passenger steps out of Elevator
- * Set the elevator in standby status
-*/
 
-	private class PassengerThread extends Thread
-	{
-		private Passenger passenger;
-		private Random willMove;
-		
-		public PassengerThread(Passenger inputPassenger)
-		{
-			super(inputPassenger.getName());
-			
-			passenger = inputPassenger;
-			
-			willMove = new Random();
-		}
-		
-		/** start the activities a person may take!*/
-		@Override
-		public void run()
-		{
-			// generate a random value(true/false)
-			// when the passenger wants to 
-			// move to the other floor
-			if(willMove.nextBoolean())
-			{
-				passenger.pressCallButton();
-				
-				// TODO perhaps a thread representing the elevator 
-				// should be called here
-				if(!building.elevator.getIsOccupied())
-				{
-					building.elevator.moveTo(passenger.getCurrentFloorNumber());
-					passenger.stepIntoElevator();
-					int newFloor = passenger.pressElevatorFloorButton();
-					building.elevator.moveTo(newFloor);
-					passenger.stepOutOfElevator(newFloor);
-				}
-				else // TODO perhaps the person should 'wait' for the elevator
-					System.out.println("Elevator is currently occupied!");
-			}
-			else
-				System.out.println("Passenger doesn't want to move");
-		}
-	}
-
-	
-	private class ElevatorThread extends Thread
-	{
-		public ElevatorThread()
-		{
-			
-		}
-	}
 }

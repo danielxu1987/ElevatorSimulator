@@ -3,7 +3,7 @@ package org.tryoop;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import org.mainLogic.Light;
+import org.simulator.mainLogic.Light;
 
 public class LightTest {
 

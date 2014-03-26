@@ -1,4 +1,4 @@
-package org.mainLogic;
+package org.simulator.mainLogic;
 
 import com.sun.org.apache.regexp.internal.recompile;
 

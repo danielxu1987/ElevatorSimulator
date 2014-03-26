@@ -1,4 +1,4 @@
-package org.mainLogic;
+package org.simulator.mainLogic;
 
 public class Clock
 {
