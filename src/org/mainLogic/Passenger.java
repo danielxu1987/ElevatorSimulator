@@ -24,9 +24,9 @@ public class Passenger {
 		return currentFloor;
 	}
 
-	public void setCurrentFloorNumber(int floorNumber) {
-		this.currentFloor = floorNumber;
-	}
+//	public void setCurrentFloorNumber(int floorNumber) {
+//		this.currentFloor = floorNumber;
+//	}
 	
 	public int getDestinedFloorNumber() {
 		return destineFloor;
@@ -66,6 +66,16 @@ public class Passenger {
 		System.out.println(message);
 	}
 	
+	/** A passenger presses the button for destine floor after 
+	 * he has stepped into the elevator*/
+	public int pressElevatorFloorButton()
+	{
+		System.out.println("Person " + name + 
+				" pressed floor button " + destineFloor + " inside elevator");
+		
+		return destineFloor;
+	}
+	
 	/** Passenger steps into ELevator */
 	public void stepIntoElevator(){
 		// events take place in a sequence
@@ -76,13 +86,13 @@ public class Passenger {
 				" just stepped into Elevator at Floor " +
 				currentFloor;
 
-		alterFloorNumber();
+		alterDestineFloor();
 		
 		System.out.println(message);
 	}
 	
 	/** Alter the destine floor*/
-	private void alterFloorNumber()
+	private void alterDestineFloor()
 	{
 		if(currentFloor == 0)
 			destineFloor = 1;
@@ -91,14 +101,16 @@ public class Passenger {
 	}
 	
 	/** Passenger steps out of Elevator */
-	public void stepOutOfElevator(){
+	public void stepOutOfElevator(int floorNumber)
+	{
 		String message = "Person " + name + 
 				" stepped out of Elevator at Floor "+
-				destineFloor;
+				floorNumber;
 //		return message;
+		currentFloor = floorNumber;
 		
 		// alter the floor where the passenger is at
-		alterFloorNumber();
+		alterDestineFloor();
 		
 		System.out.println(message);
 	}

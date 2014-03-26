@@ -35,7 +35,7 @@ public class MainEntry extends JFrame
 	private FloorCanvas floor1, floor2;
 	private ElevatorCanvas elevator;
 	private JButton floorButton1, floorButton2;
-	private LiftControlBoard liftControlBoard;
+	private ElevatorControlBoard liftControlBoard;
 	private FloorControlBoard floorControlBoard1,
 		floorControlBoard2;
 	
@@ -127,15 +127,15 @@ public class MainEntry extends JFrame
 		
 		// initialise 3 independent drawing regions
 		// control board for floor 1 and 2 and elevator
-		floorControlBoard1 = new FloorControlBoard();
+		floorControlBoard1 = new FloorControlBoard(1);
 		floorControlBoard1.setBorder(mediumLine);
 		controlCanvas.add(floorControlBoard1);
 
-		liftControlBoard = new LiftControlBoard();
+		liftControlBoard = new ElevatorControlBoard();
 		liftControlBoard.setBorder(mediumLine);
 		controlCanvas.add(liftControlBoard);
 		
-		floorControlBoard2 = new FloorControlBoard();
+		floorControlBoard2 = new FloorControlBoard(0);
 		floorControlBoard2.setBorder(mediumLine);
 		controlCanvas.add(floorControlBoard2);
 		
@@ -232,7 +232,7 @@ public class MainEntry extends JFrame
 	private class PassengerThread extends Thread
 	{
 		private Passenger passenger;
-		private Random movable;
+		private Random willMove;
 		
 		public PassengerThread(Passenger inputPassenger)
 		{
@@ -240,17 +240,18 @@ public class MainEntry extends JFrame
 			
 			passenger = inputPassenger;
 			
-			movable = new Random();
+			willMove = new Random();
 		}
 		
 		/** start the activities a person may take!*/
 		@Override
 		public void run()
 		{
+			// generate a random value(true/false)
 			// when the passenger wants to 
 			// move to the other floor
-			if(movable.nextBoolean())
-			{				
+			if(willMove.nextBoolean())
+			{
 				passenger.pressCallButton();
 				
 				// TODO perhaps a thread representing the elevator 
@@ -259,8 +260,9 @@ public class MainEntry extends JFrame
 				{
 					building.elevator.moveTo(passenger.getCurrentFloorNumber());
 					passenger.stepIntoElevator();
-					building.elevator.moveTo(passenger.getDestinedFloorNumber());
-					passenger.stepOutOfElevator();
+					int newFloor = passenger.pressElevatorFloorButton();
+					building.elevator.moveTo(newFloor);
+					passenger.stepOutOfElevator(newFloor);
 				}
 				else // TODO perhaps the person should 'wait' for the elevator
 					System.out.println("Elevator is currently occupied!");
@@ -270,4 +272,12 @@ public class MainEntry extends JFrame
 		}
 	}
 
+	
+	private class ElevatorThread extends Thread
+	{
+		public ElevatorThread()
+		{
+			
+		}
+	}
 }

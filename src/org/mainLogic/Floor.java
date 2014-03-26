@@ -45,6 +45,8 @@ public class Floor {
 			peopleCount = peopleCountRightNow;
 		else
 		{
+			// when the number people at the floor exceeds the max
+			// capacity of that floor a warning will be displayed
 			peopleCount = maxCapacity;
 			System.out.println("Floor " + floorNumber + 
 					" can only contain " + maxCapacity + " people.");
